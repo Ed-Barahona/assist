@@ -1,8 +1,9 @@
 //var socket = io();
 var socket  = io.connect();
-var username = 'guest';
+var username = 'guest'; // This will change if user is logged in
 var myRoom;
 var room;
+var messages;
 
 // Check if nickname stored in localStorage
 if('localStorage' in window && localStorage.getItem('username')) {
@@ -26,6 +27,12 @@ socket.on('message', function(msg) {
     
 });
 
+socket.on('recent messages', function(data) {
+
+    console.log('msg list:', data.messages);
+
+});
+
 
 // create a basic random number as uuid until backend provides one
 var uuid = Math.round((Math.random() * 1000000));
@@ -46,7 +53,11 @@ function createRoom(room){
     console.log('joined room: ', room);
 }
 
-
+function getMessages(room){
+    socket.emit('my messages', room);
+    console.log('messages requested');
+}
+                
 $('form').submit(function(e){
     
     //e.preventDefault();
@@ -92,6 +103,7 @@ function checkID(){
         console.log('set: ', localID);
         console.log('UUID: ', uuid);
         createRoom(uuid);
+        getMessages(uuid);
     }
    
 }

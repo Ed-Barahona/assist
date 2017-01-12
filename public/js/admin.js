@@ -13,7 +13,7 @@ var username = 'admin';
 // Request users from server
 socket.on('connect', function() {
   socket.emit('get users');
-  socket.emit('get messages');
+  //socket.emit('get messages');
 });
 
 

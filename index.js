@@ -121,6 +121,12 @@ io.on('connection', function(socket) {
         pushToRedis(msg);
 
     });
+    
+    // Get recent messages
+    socket.on('my messages', function(room) {
+        console.log('messages requested for: ', room);
+        getMessages(room);
+    });
 
     // Admin dashboard stuff
     socket.on('get users', function(data) {
@@ -149,7 +155,7 @@ function pushToRedis(msg) {
     redisClient.ltrim(messageKey, 0, 99);
 }
 
-function getMessages(data) {
+function getAllMessages(data) {
     // Get the 100 most recent messages from Redis
     var messages = redisClient.lrange('messages', 0, 99, function(err, reply) {
         if (!err) {
@@ -163,6 +169,32 @@ function getMessages(data) {
         } else {
             // no messages
         };
+    });
+}
+
+function getMessages(data) {
+    // Get the 100 most recent messages from Redis
+    var messageKey = 'messages:' + data;
+    console.log('retriving for: ', messageKey);
+//    var messages = redisClient.lrange(messageKey, 0, 99, function(err, reply) {
+//        
+//        
+//        if (!err) {
+//            var result = [];
+//            // Loop through the list, parsing each item into an object
+//            for (var msg in reply) result.push(JSON.parse(reply[msg]));
+//            // Pass the message list to the view
+//            io.sockets.emit("recent messages", {
+//                messages: result
+//            });
+//        } else {
+//            // no messages
+//        };
+//    });
+
+    
+    redisClient.lrange(messageKey, 0, -1, function(err, reply){
+        console.log('reply: ', reply);
     });
 }
 
@@ -253,7 +285,6 @@ const context0 = {};
 
 // Contains user sessions.
 // Each session has an entry:
-// sessionId -> {fbid: facebookUserId, context: sessionState}
 const sessions = {};
 
 
