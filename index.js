@@ -146,15 +146,14 @@ io.on('connection', function(socket) {
 
 
 function pushToRedis(msg) {
-    var messageKey = 'messages:' + msg.room;
-   
-    var message    = JSON.stringify(msg);
-    messageKey = JSON.stringify(messageKey);
-
-    redisClient.lpush(messageKey, message);
+    
+    var message = JSON.stringify(msg);
+    
+    redisClient.lpush(`message:${msg.room}`, message);
     redisClient.ltrim(messageKey, 0, 99);
 }
 
+// Get messages for Admin Dashboard
 function getAllMessages(data) {
     // Get the 100 most recent messages from Redis
     var messages = redisClient.lrange('messages', 0, 99, function(err, reply) {
@@ -172,30 +171,27 @@ function getAllMessages(data) {
     });
 }
 
+// Get recent messages for client
 function getMessages(data) {
-    // Get the 100 most recent messages from Redis
-    var messageKey = 'messages:' + data;
-    console.log('retriving for: ', messageKey);
-//    var messages = redisClient.lrange(messageKey, 0, 99, function(err, reply) {
-//        
-//        
-//        if (!err) {
-//            var result = [];
-//            // Loop through the list, parsing each item into an object
-//            for (var msg in reply) result.push(JSON.parse(reply[msg]));
-//            // Pass the message list to the view
-//            io.sockets.emit("recent messages", {
-//                messages: result
-//            });
-//        } else {
-//            // no messages
-//        };
-//    });
-
-    
-    redisClient.lrange(messageKey, 0, -1, function(err, reply){
-        console.log('reply: ', reply);
+    // Get the 100 most recent messages from Redis  
+    var messages = redisClient.lrange(`message:${data}`, 0, 99, function(err, reply) {
+        
+        if (!err) {
+            var result = [];
+            // Loop through the list, parsing each item into an object
+            for (var msg in reply) result.push(JSON.parse(reply[msg]));
+            // Pass the message list to the view
+            io.sockets.emit("recent messages", {
+                messages: result
+            });
+        } else {
+            // no messages
+            console.log(`NO MESSAGES FOUND FOR: messages:${data}`);
+        };
     });
+//    redisClient.lrange(`message:${data}`, 0, -1, function(err, reply){
+//        console.log('reply: ', reply);
+//    });
 }
 
 
