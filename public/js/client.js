@@ -30,6 +30,7 @@ socket.on('message', function(msg) {
 socket.on('recent messages', function(data) {
 
     console.log('msg list:', data.messages);
+    loadMessages(data)
 
 });
 
@@ -137,7 +138,7 @@ function addMessage(msg){
 function loadMessages(data){
     
     var messages = data.messages;
-    
+    $('#messages').html('');
     messages.forEach(addMessage);
 }
 
