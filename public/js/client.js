@@ -155,9 +155,19 @@ function loadMessages(data){
 }
 
 function showWelcome(){
-    var welcomeMsg = 'How can we help you?';
-    $('#messages').append($('<li class="bubble you">').text(welcomeMsg));
+    
+    var welcome = 'How can we help you?';
+    var msgDate = new Date();
+    var message   = {
+        username: 'assist',
+        room: room,
+        message: welcome,
+        when: msgDate
+    };
+    
+    addMessage(message);
 }
+
 function scrollWindow(){
    var msgWindow = $('#messages-container');
    msgWindow.scrollTop(msgWindow.prop("scrollHeight"));
@@ -169,7 +179,6 @@ function scrollMessage(){
 
    msgWindow.animate({ scrollTop: msgWindow.prop("scrollHeight")}, 1000);
 }
-
     
 var chatWidget = (".chat-widget-container"),
     chatBox    = $(".chat-box-container"),
