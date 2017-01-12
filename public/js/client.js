@@ -149,13 +149,13 @@ function addMessage(msg){
 function loadMessages(data){
     
     var messages = data.messages;
-    $('#messages').html('');
+    
     messages.forEach(addMessage);
     setTimeout(scrollWindow, 100);
 }
 
 function showWelcome(){
-    
+    $('#messages').html('');
     var welcome = 'How can we help you?';
     var msgDate = new Date();
     var message   = {
