@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Narvar Assist | Admin Dashboard</title>
+    <script src="/socket.io/socket.io.js"></script>
+   <!-- Latest compiled and minified CSS -->
+<!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+<!-- Optional theme -->
+<!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">-->
+<link rel="stylesheet" href="css/admin.css">
+
+  </head>
+  <body>
+<!--
+  <div class="container">
+
+    <div class="row">
+            
+            <div class="col-lg-3 col-md-3 col-sm-6">
+              <div class="widget">
+                <div class="widget-heading clearfix">
+                  <div class="pull-left">Users</div>
+                  
+                </div>
+                <div class="widget-body clearfix">
+                  <div class="pull-left">
+                    <i class="fa fa-user"></i>
+                  </div>
+                  <div class="pull-right number">25000</div>
+                </div>
+
+               
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+              <div class="widget">
+                <div class="widget-heading clearfix">
+                  <div class="pull-left">Messages</div>
+             
+                </div>
+                <div class="widget-body clearfix">
+                  <div class="pull-left">
+                    <i class="fa fa-envelope"></i>
+                  </div>
+                  <div class="pull-right number">35000</div>
+                </div>
+                
+              </div>
+            </div>
+</div>
+      </div>
+-->
+
+
+<div class="wrapper">
+    <div class="container">
+        <div class="left user-container">
+            <div class="top">
+                <input type="text" />
+                <a href="javascript:;" class="search"></a>
+            </div>
+            <ul id="user-list" class="people">
+                
+            </ul>
+        </div>
+        <div class="right">
+            <div class="top"><span>To: <span class="name">User</span></span><a href="javascript:;"  id="ai-btn" class="enable-btn" data-room="room">ENABLE ASSIST</a></div>
+            <div id="message-window" class="chat active-chat" data-chat="live-chat">
+                <div class="conversation-start">
+                    <span>Today, 3:48 PM</span>
+                </div>
+
+            </div>
+
+<!--
+            <div class="chat" data-chat="person2">
+                <div class="conversation-start">
+                    <span>Today, 5:38 PM</span>
+                </div>
+                <div class="bubble you">
+                    Hello, can you hear me?
+                </div>
+                <div class="bubble you">
+                    I'm in California dreaming
+                </div>
+                <div class="bubble me">
+                    ... about who we used to be.
+                </div>
+                <div class="bubble me">
+                    Are you serious?
+                </div>
+                <div class="bubble you">
+                    When we were younger and free...
+                </div>
+                <div class="bubble you">
+                    I've forgotten how it felt before
+                </div>
+            </div>
+-->
+
+
+
+            <div class="write">
+                <a href="javascript:;" class="write-link attach"></a>
+                <form action="">
+                <input type="text" id="m" autocomplete="off" />
+                </form>
+                <a href="javascript:;" class="write-link smiley"></a>
+                <a href="javascript:;" class="write-link send"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+  <div class="user-container">
+       <div id="users"><ul></ul></div>
+    </div>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+-->
+  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	<script src="js/admin.js"></script>
+    </body>
+</html>

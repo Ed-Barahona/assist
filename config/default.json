@@ -1,0 +1,8 @@
+{
+    "envName": "Development",
+    "port": "3000",
+    "witAccessToken": "G5SMHRDZFNG46BHXC6LXGTAH7CLUTYP2",
+    "wit": {
+        "accessToken": "G5SMHRDZFNG46BHXC6LXGTAH7CLUTYP2"
+    }
+}

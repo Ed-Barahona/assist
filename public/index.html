@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Narvar Assist</title>
+    <link rel="stylesheet" href="css/client.css">
+    <script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+</script>
+<!--
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+-->
+  </head>
+  <body>
+ 
+    
+    
+    
+<div class="chat-widget-wrapper">
+  <div class="chat-widget-container">
+    <div class="chat-widget-text">
+      <p class="heading">Narvar Assist</p>
+      <p>How can we help?</p>
+    </div>
+    <div class="chat-widget-avatar">
+<!--      <img src="http://image.flaticon.com/icons/svg/236/236831.svg" alt="" />-->
+      <img src="assets/speech-bubble.svg" alt="Chat Icon" />
+    </div>
+  </div>
+  <div class="chat-box-container">
+   <div class="conversation-header">
+    <div class="team-profile">
+       <div class="agent-avatar bot">
+            <img src="assets/narvar-logo.png" alt="Chat Avatar" />
+            <h4>Narvar Assist</h4>
+        </div>
+        <div class="agent-avatar person">
+            <img src="assets/ed-avatar.png" alt="Chat Avatar" />
+            <h4>Ed</h4>
+        </div>
+    </div>
+   </div>
+    <div class="conversation-container">
+     <ul id="messages"></ul>
+    </div>
+    
+    <div class="write">
+        <a href="javascript:;" class="write-link attach"></a>
+        <form id="send-message" action="">
+        <input type="text" id="m" autocomplete="off" placeholder="Send message" />
+        </form>
+        <a href="javascript:;" class="write-link smiley"></a>
+        <a href="javascript:;" class="write-link send"></a>
+    </div>
+    
+    
+  </div>
+</div>
+    
+  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	
+	<script src="js/client.js"></script>
+    </body>
+</html>
