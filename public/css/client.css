@@ -103,6 +103,8 @@ p {
   bottom: 10px;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
+  border-radius: 8px;
+  box-shadow: 0 5px 40px rgba(0,0,0,.16);
   overflow: hidden;
   -webkit-transition: all 0.2s ease 0s;
   -moz-transition: all 0.2s ease 0s;

@@ -4,6 +4,7 @@ var username = 'guest'; // This will change if user is logged in
 var myRoom;
 var room;
 var messages;
+var recent = false;
 
 // Check if nickname stored in localStorage
 if('localStorage' in window && localStorage.getItem('username')) {
@@ -24,13 +25,21 @@ socket.on('message', function(msg) {
    //$('#messages').append($('<li>').text(msg.message));
    
   addMessage(msg);
+  scrollMessage();
     
 });
 
 socket.on('recent messages', function(data) {
 
-    console.log('msg list:', data.messages);
-    loadMessages(data)
+    if(data.messages.length > 0){
+        console.log('msg list:', data.messages);
+        loadMessages(data);
+        recent = true;
+    } else {
+        console.log('no recent messages');
+        recent = false;
+        showWelcome();
+    }
 
 });
 
@@ -61,7 +70,7 @@ function getMessages(room){
                 
 $('form').submit(function(e){
     
-    //e.preventDefault();
+    e.preventDefault();
     
     sendMessage();
     //$('#messages').append($('<li>').text(myMessage));
@@ -104,7 +113,7 @@ function checkID(){
         console.log('set: ', localID);
         console.log('UUID: ', uuid);
         createRoom(uuid);
-        getMessages(uuid);
+        //getMessages(uuid);
     }
    
 }
@@ -112,21 +121,23 @@ function checkID(){
 
 function addMessage(msg){
     
+
    var userName = msg.username;
     
    switch (userName) {
         case 'assist':
             $('#messages').append($('<li class="bubble you">').text(msg.message));
-        //$('#message-window').append($('<div class="bubble you">').text(msg.message));
+            
         break;
            
         case 'guest':
             $('#messages').append($('<li class="bubble me">').text(msg.message));
-        //$('#message-window').append($('<div class="bubble you">').text(msg.message));
+            
         break;
         
         case 'admin':
             $('#messages').append($('<li class="bubble you">').text(msg.message));
+            
             changeAvatar();
         break;
         
@@ -140,9 +151,24 @@ function loadMessages(data){
     var messages = data.messages;
     $('#messages').html('');
     messages.forEach(addMessage);
+    setTimeout(scrollWindow, 100);
 }
 
+function showWelcome(){
+    var welcomeMsg = 'How can we help you?';
+    $('#messages').append($('<li class="bubble you">').text(welcomeMsg));
+}
+function scrollWindow(){
+   var msgWindow = $('#messages-container');
+   msgWindow.scrollTop(msgWindow.prop("scrollHeight"));
+}
 
+function scrollMessage(){
+    
+   var msgWindow = $('#messages-container');
+
+   msgWindow.animate({ scrollTop: msgWindow.prop("scrollHeight")}, 1000);
+}
 
     
 var chatWidget = (".chat-widget-container"),
@@ -161,12 +187,11 @@ function changeAvatar(){
   
 $(chatWidget).click(function(e){
     e.preventDefault();
-    var welcomeMsg = 'How can we help you?';
-    
+    getMessages(uuid);
     chatBox.toggleClass("show");
-    //$('#messages').append($('<li class="bubble you">').text(welcomeMsg));
     botAvatar.addClass("active-agent");
     $('.chat-widget-text').hide();
+    
 });
 
 checkID();

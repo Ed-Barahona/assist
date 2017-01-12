@@ -150,7 +150,7 @@ function pushToRedis(msg) {
     var message = JSON.stringify(msg);
     
     redisClient.lpush(`message:${msg.room}`, message);
-    redisClient.ltrim(messageKey, 0, 99);
+    redisClient.ltrim(`message:${msg.room}`, 0, 99);
 }
 
 // Get messages for Admin Dashboard
@@ -190,7 +190,14 @@ function getMessages(data) {
         };
     });
 //    redisClient.lrange(`message:${data}`, 0, -1, function(err, reply){
-//        console.log('reply: ', reply);
+//        if (!err) {
+//              io.sockets.emit("recent messages", {
+//                    messages: reply
+//                });
+//        } else {
+//             console.log(`NO MESSAGES FOUND FOR: messages:${data}`);
+//        }
+//       
 //    });
 }
 
